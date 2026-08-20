@@ -11,6 +11,10 @@ class UserService {
     const updatedUser = await userRepository.update(userId, userData);
     return updatedUser;
   }
+  async isUsernameAvailable(username: string): Promise<boolean> {
+    const user = await userRepository.findByUsername(username);
+    return !user;
+  }
 }
 
 export const userService = new UserService();

@@ -28,6 +28,7 @@ export const auth = betterAuth({
   },
   socialProviders: {
     google: {
+      prompt: 'select_account',
       clientId: config.auth.googleClientId,
       clientSecret: config.auth.googleClientSecret,
       hd: 'g.bracu.ac.bd',

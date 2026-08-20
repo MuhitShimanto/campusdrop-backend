@@ -48,6 +48,13 @@ class UserRepository {
 
     return result.rows[0] ?? null;
   }
+  async findByUsername(username: string): Promise<User | null> {
+    const result = await query<User>(
+      `SELECT user_id, name FROM users WHERE slug = $1`,
+      [username],
+    );
+    return result.rows[0] ?? null;
+  }
 }
 
 export const userRepository = new UserRepository();

@@ -35,7 +35,12 @@ export const updateUserByAdminSchema = z.object({
   isVerified: z.boolean().optional(),
 });
 
+export const checkUsernameAvailabilitySchema = z.object({
+  username: z.string().min(1).max(30),
+})
+
 export type CreateUserInput = z.infer<typeof createUserSchema>;
 export type UpdateSelfUserInput = z.infer<typeof updateSelfUserSchema>;
+export type CheckUsernameAvailabilityInput = z.infer<typeof checkUsernameAvailabilitySchema>;
 
 export type UpdateUserByAdminInput = z.infer<typeof updateUserByAdminSchema>;
