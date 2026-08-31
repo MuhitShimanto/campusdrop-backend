@@ -11,5 +11,9 @@ storeRouter.post('/', requireAuth, validateBody(createStoreSchema), asyncHandler
 storeRouter.patch('/', requireAuth, validateBody(updateStoreSchema), asyncHandler(storeController.updateStore))
 storeRouter.get('/get-store', requireAuth, asyncHandler(storeController.getStore))
 storeRouter.get('/check-store-slug', requireAuth, asyncHandler(storeController.checkStoreSlug))
+// Public Route
+storeRouter.get('/:storeSlug', asyncHandler(storeController.getStoreView))
+
+
 
 export default storeRouter;

@@ -1,8 +1,6 @@
 import { generateUuid } from '../../lib/uuid.js';
 import { storeRepository } from './store.repository.js';
 import { CreateStoreInput } from './store.schema.js';
-import { errorHandler } from '../../middleware/error-handler.js';
-import { AppError } from '../../utils/errors/app-error.js';
 
 class StoreService {
   async getStore(user_id: string) {
@@ -34,6 +32,13 @@ class StoreService {
     }
     const result = await storeRepository.update(user_id, input);
     return result;
+  }
+  async getStoreView(storeSlug: string) {
+    const store = await storeRepository.getStoreWithOwnerBySlug(storeSlug);
+    if (!store) {
+      throw new Error('Store not found');
+    }
+    return store;
   }
 }
 

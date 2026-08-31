@@ -31,9 +31,34 @@ class StoreRepository {
     const setClause = fields.map((field, index) => `${field} = $${index + 1}`).join(', ');
     const result = await query<Store>(
       `UPDATE stores SET ${setClause} WHERE user_id = $${values.length + 1} RETURNING *`,
-      [...values, user_id]
+      [...values, user_id],
     );
     return result.rows[0];
+  }
+  async getStoreWithOwnerBySlug(slug: string) {
+    const result = await query<Store>(
+      `SELECT
+        jsonb_build_object(
+            'user_id', u.user_id,
+            'name', u.name,
+            'avatar', u.avatar,
+            'slug', u.slug
+        ) AS "user",
+        jsonb_build_object(
+            'store_id', s.store_id,
+            'name', s.name,
+            'slug', s.slug,
+            'avatar', s.avatar,
+            'cover', s.cover,
+            'description', s.description
+        ) AS "store"
+      FROM stores s
+      JOIN users u
+          ON s.user_id = u.user_id
+      WHERE s.slug = $1;`,
+      [slug],
+    );
+    return result.rows[0] ?? null;
   }
 }
 

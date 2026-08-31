@@ -27,6 +27,11 @@ class StoreController {
         const result = await storeService.updateStore(req.user?.id as string, input);
         sendResponse(res, 200, 'success', 'Store updated successfully', result);
     }
+    async getStoreView(req: Request, res: Response): Promise<void> {
+        const { storeSlug } = req.params;
+        const result = await storeService.getStoreView(storeSlug);
+        sendResponse(res, 200, 'success', 'Store view retrieved successfully', result);
+    }
 }
 
 export const storeController = new StoreController();

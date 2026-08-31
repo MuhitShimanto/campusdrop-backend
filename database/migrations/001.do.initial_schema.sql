@@ -534,14 +534,14 @@ ALTER TABLE stores
     ADD CONSTRAINT fk_store_user_id
     FOREIGN KEY (user_id)
     REFERENCES users (user_id)
-    ON DELETE NO ACTION;
+    ON DELETE CASCADE;
 
 
 ALTER TABLE orders
     ADD CONSTRAINT fk_orders_user_id
     FOREIGN KEY (user_id)
     REFERENCES users (user_id)
-    ON DELETE NO ACTION;
+    ON DELETE CASCADE;
 
 
 
@@ -595,14 +595,14 @@ ALTER TABLE listings
     ADD CONSTRAINT fk_listing_store_id
     FOREIGN KEY (store_id)
     REFERENCES stores (store_id)
-    ON DELETE NO ACTION;
+    ON DELETE CASCADE;
 
 
 ALTER TABLE listings
     ADD CONSTRAINT fk_listing_category_id
     FOREIGN KEY (category_id)
     REFERENCES categories (category_id)
-    ON DELETE NO ACTION;
+    ON DELETE CASCADE;
 
 
 -- ------------------------------------------------------------
@@ -670,14 +670,14 @@ ALTER TABLE order_items
     ADD CONSTRAINT fk_order_item_order_id
     FOREIGN KEY (order_id)
     REFERENCES orders (order_id)
-    ON DELETE NO ACTION;
+    ON DELETE CASCADE;
 
 
 ALTER TABLE order_items
     ADD CONSTRAINT fk_order_item_listing_id
     FOREIGN KEY (listing_id)
     REFERENCES listings (listing_id)
-    ON DELETE NO ACTION;
+    ON DELETE CASCADE;
 
 
 ALTER TABLE order_item_options
@@ -691,14 +691,14 @@ ALTER TABLE order_item_options
     ADD CONSTRAINT fk_order_item_options_value_id
     FOREIGN KEY (value_id)
     REFERENCES option_values (value_id)
-    ON DELETE NO ACTION;
+    ON DELETE CASCADE;
 
 
 ALTER TABLE reviews
     ADD CONSTRAINT fk_review_order_item_id
     FOREIGN KEY (order_item_id)
     REFERENCES order_items (order_item_id)
-    ON DELETE NO ACTION;
+    ON DELETE CASCADE;
 
 
 -- ------------------------------------------------------------
@@ -723,7 +723,7 @@ ALTER TABLE notifications
     ADD CONSTRAINT fk_notification_notification_type_id
     FOREIGN KEY (notification_type_id)
     REFERENCES notification_types (notification_type_id)
-    ON DELETE NO ACTION;
+    ON DELETE CASCADE;
 
 
 -- ------------------------------------------------------------
