@@ -11,6 +11,7 @@ dropRouter.post('/create-preorder', requireAuth, validateBody(createPreOrderSche
 dropRouter.post(`/create-alwayson`, requireAuth, validateBody(createAlwaysOnSchema), dropController.createAlwaysOn)
 dropRouter.get(`/get-my-drops`, requireAuth, dropController.getMyListings)
 // Public Routes
+dropRouter.get(`/`, dropController.getListings)
 dropRouter.get(`/:listing_id`, dropController.getListingById)
 
 export default dropRouter;

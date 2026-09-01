@@ -1,4 +1,5 @@
 import z from "zod";
+import { Drop } from "./drop.model.js";
 
 // General Drop Schema
 export const createDropSchema = z.object({
@@ -25,6 +26,46 @@ export const updateDropSchema = z.object({
   pickup_ends_at: z.string().optional(),
 })
 
+interface GetDropsQuery {
+  // Pagination
+  page?: number;
+  limit?: number;
+
+  // Search
+  search?: string;
+
+  // References
+  store_id?: string;
+  category_id?: string;
+
+  // Type / status
+  listing_type?: "always_on" | "preorder";
+  status?: Drop["status"];
+  fulfillment_mode?: Drop["fulfillment_mode"];
+
+  // Price
+  min_price?: number;
+  max_price?: number;
+
+  // Pickup
+  pickup_location?: string;
+  pickup_starts_after?: string;
+  pickup_starts_before?: string;
+
+  // Preorder
+  order_starts_after?: string;
+  order_starts_before?: string;
+  order_ends_after?: string;
+  order_ends_before?: string;
+
+  // Always-on
+  min_delivery_days?: number;
+  max_delivery_days?: number;
+
+  // Sorting
+  sort_by?: "created_at" | "updated_at" | "price" | "name";
+  sort_order?: "asc" | "desc";
+}
 
 
 // PreOrder and AlwaysOn Drop Schemas
